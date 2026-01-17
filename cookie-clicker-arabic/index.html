@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="description" content="لعبة Cookie Clicker بالعربي - انقر على الكوكيز واجمع أكبر عدد ممكن!">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <title>🍪 Cookie Clicker بالعربي</title>
+    
+    <!-- خط Tajawal العربي -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ملفات CSS -->
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- حاوية الإشعارات -->
+    <div id="notification-container"></div>
+
+    <!-- الحاوية الرئيسية -->
+    <div class="game-container">
+        
+        <!-- قسم الكوكيز -->
+        <section class="cookie-section">
+            <div class="cookie-counter">
+                <div id="cookie-count">0</div>
+                <div class="cookie-label">كوكيز 🍪</div>
+                <div id="cps-display">0 كوكيز/ثانية</div>
+            </div>
+            
+            <div id="cookie" role="button" aria-label="انقر للحصول على كوكيز">
+                🍪
+            </div>
+        </section>
+
+        <!-- قسم التبويبات -->
+        <section class="tabs-section">
+            <!-- رأس التبويبات -->
+            <div class="tabs-header">
+                <button class="tab-btn active" data-tab="shop">🛒 المتجر</button>
+                <button class="tab-btn" data-tab="achievements">🏆 الإنجازات</button>
+                <button class="tab-btn" data-tab="stats">📊 الإحصائيات</button>
+                <button class="tab-btn" data-tab="settings">⚙️ الإعدادات</button>
+            </div>
+
+            <!-- محتوى التبويبات -->
+            <div class="tabs-content">
+                
+                <!-- تبويب المتجر -->
+                <div id="shop-tab" class="tab-content active">
+                    <div id="shop-container">
+                        <!-- سيتم ملؤه بواسطة JavaScript -->
+                    </div>
+                </div>
+
+                <!-- تبويب الإنجازات -->
+                <div id="achievements-tab" class="tab-content">
+                    <div class="achievements-header">
+                        <span>الإنجازات: </span>
+                        <span id="achievements-count">0/0</span>
+                    </div>
+                    <div id="achievements-container">
+                        <!-- سيتم ملؤه بواسطة JavaScript -->
+                    </div>
+                </div>
+
+                <!-- تبويب الإحصائيات -->
+                <div id="stats-tab" class="tab-content">
+                    <div id="stats-container">
+                        <!-- سيتم ملؤه بواسطة JavaScript -->
+                    </div>
+                </div>
+
+                <!-- تبويب الإعدادات -->
+                <div id="settings-tab" class="tab-content">
+                    <div class="settings-section">
+                        <h3 style="margin-bottom: 15px; text-align: center;">⚙️ الإعدادات</h3>
+                        
+                        <button class="settings-btn primary" onclick="SaveSystem.save(); UI.showNotification('تم الحفظ!', 'success');">
+                            💾 حفظ اللعبة
+                        </button>
+                        
+                        <button class="settings-btn primary" onclick="location.reload();">
+                            🔄 تحديث اللعبة
+                        </button>
+                        
+                        <button class="settings-btn danger" onclick="Game.reset();">
+                            🗑️ إعادة تعيين اللعبة
+                        </button>
+                        
+                        <div style="margin-top: 30px; text-align: center; color: var(--text-secondary);">
+                            <p>Cookie Clicker بالعربي</p>
+                            <p>الإصدار 1.0.0</p>
+                            <p style="margin-top: 10px; font-size: 0.8rem;">
+                                صُنع بـ ❤️ للموبايل
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ملفات JavaScript -->
+    <script src="js/config.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/save.js"></script>
+    <script src="js/shop.js"></script>
+    <script src="js/achievements.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
