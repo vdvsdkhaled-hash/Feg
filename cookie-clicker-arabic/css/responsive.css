@@ -1,0 +1,192 @@
+/**
+ * Cookie Clicker Arabic - التصميم المتجاوب
+ * مُحسّن لـ Realme C25Y (720 x 1600)
+ */
+
+/* الشاشات الصغيرة جداً (أقل من 360px) */
+@media screen and (max-width: 359px) {
+    #cookie {
+        width: 150px;
+        height: 150px;
+        font-size: 110px;
+    }
+
+    #cookie-count {
+        font-size: 2rem;
+    }
+
+    .tab-btn {
+        font-size: 0.75rem;
+        padding: 10px 5px;
+    }
+
+    .shop-item-icon {
+        font-size: 2rem;
+    }
+}
+
+/* الشاشات الصغيرة (360px - 480px) - Realme C25Y */
+@media screen and (min-width: 360px) and (max-width: 480px) {
+    .cookie-section {
+        min-height: 40vh;
+        padding: 15px;
+    }
+
+    #cookie {
+        width: 180px;
+        height: 180px;
+        font-size: 130px;
+    }
+
+    #cookie-count {
+        font-size: 2.2rem;
+    }
+
+    .tabs-content {
+        padding: 12px;
+    }
+}
+
+/* الشاشات المتوسطة (481px - 768px) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .game-container {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    #cookie {
+        width: 220px;
+        height: 220px;
+        font-size: 170px;
+    }
+
+    #cookie-count {
+        font-size: 2.8rem;
+    }
+
+    .shop-item {
+        padding: 18px;
+    }
+}
+
+/* الشاشات الكبيرة (أكثر من 768px) */
+@media screen and (min-width: 769px) {
+    .game-container {
+        max-width: 600px;
+        margin: 0 auto;
+        min-height: 100vh;
+    }
+
+    .cookie-section {
+        min-height: 50vh;
+    }
+
+    #cookie {
+        width: 250px;
+        height: 250px;
+        font-size: 200px;
+    }
+
+    #cookie-count {
+        font-size: 3rem;
+    }
+
+    .tabs-section {
+        border-radius: 30px 30px 0 0;
+    }
+
+    .shop-item {
+        padding: 20px;
+    }
+
+    .shop-item-icon {
+        font-size: 3rem;
+    }
+}
+
+/* الوضع الأفقي */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .game-container {
+        flex-direction: row;
+    }
+
+    .cookie-section {
+        flex: 0 0 40%;
+        min-height: 100vh;
+        padding: 10px;
+    }
+
+    #cookie {
+        width: 120px;
+        height: 120px;
+        font-size: 90px;
+    }
+
+    #cookie-count {
+        font-size: 1.5rem;
+    }
+
+    .tabs-section {
+        flex: 1;
+        border-radius: 20px 0 0 20px;
+    }
+
+    .tabs-content {
+        max-height: calc(100vh - 60px);
+    }
+}
+
+/* تحسينات للشاشات عالية الكثافة */
+@media screen and (-webkit-min-device-pixel-ratio: 2),
+       screen and (min-resolution: 192dpi) {
+    .click-value {
+        font-size: 28px;
+    }
+}
+
+/* تحسينات للوضع الداكن في النظام */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-gradient-start: #1a1a2e;
+        --bg-gradient-end: #16213e;
+    }
+}
+
+/* تحسينات للوضع الفاتح في النظام */
+@media (prefers-color-scheme: light) {
+    /* يمكن تفعيلها لاحقاً */
+}
+
+/* تقليل الحركة للمستخدمين الذين يفضلون ذلك */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    #cookie {
+        animation: none;
+    }
+}
+
+/* تحسينات للطباعة (في حالة الحاجة) */
+@media print {
+    .game-container {
+        background: white;
+    }
+
+    .tabs-section {
+        display: none;
+    }
+}
+
+/* Safe area للأجهزة ذات النوتش */
+@supports (padding-top: env(safe-area-inset-top)) {
+    .game-container {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+    }
+}
