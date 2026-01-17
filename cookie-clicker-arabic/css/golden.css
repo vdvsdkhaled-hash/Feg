@@ -1,0 +1,232 @@
+/**
+ * Cookie Clicker Arabic - أنماط الكوكيز الذهبي
+ */
+
+/* الكوكيز الذهبي */
+.golden-cookie {
+    position: fixed;
+    width: 80px;
+    height: 80px;
+    font-size: 60px;
+    cursor: pointer;
+    z-index: 1500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 0 20px gold) 
+            drop-shadow(0 0 40px rgba(255, 215, 0, 0.5))
+            hue-rotate(30deg) saturate(1.5);
+    animation: goldenFloat 2s ease-in-out infinite, goldenGlow 1s ease-in-out infinite alternate;
+    transition: transform 0.2s ease;
+}
+
+.golden-cookie:hover {
+    transform: scale(1.2);
+}
+
+.golden-cookie.hidden {
+    display: none;
+}
+
+.golden-cookie.spawning {
+    animation: goldenSpawn 0.5s ease-out, goldenFloat 2s ease-in-out infinite 0.5s, goldenGlow 1s ease-in-out infinite alternate;
+}
+
+/* أنيميشن ظهور الكوكيز الذهبي */
+@keyframes goldenSpawn {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(-180deg);
+    }
+    50% {
+        transform: scale(1.3) rotate(10deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+/* أنيميشن الطفو */
+@keyframes goldenFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* أنيميشن التوهج الذهبي */
+@keyframes goldenGlow {
+    0% {
+        filter: drop-shadow(0 0 20px gold) 
+                drop-shadow(0 0 40px rgba(255, 215, 0, 0.5))
+                hue-rotate(30deg) saturate(1.5);
+    }
+    100% {
+        filter: drop-shadow(0 0 30px gold) 
+                drop-shadow(0 0 60px rgba(255, 215, 0, 0.8))
+                hue-rotate(30deg) saturate(2);
+    }
+}
+
+/* تأثير النقر على الكوكيز الذهبي */
+.golden-click-effect {
+    position: fixed;
+    font-size: 80px;
+    pointer-events: none;
+    z-index: 1600;
+    animation: goldenClickBurst 1s ease-out forwards;
+}
+
+@keyframes goldenClickBurst {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(3);
+    }
+}
+
+/* الكوكيز المتساقط */
+.falling-cookie {
+    position: fixed;
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 1400;
+    transition: transform 0.1s ease;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+}
+
+.falling-cookie:hover {
+    transform: scale(1.3);
+}
+
+/* مؤشرات التأثيرات النشطة */
+#effect-indicators {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1200;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 90%;
+    max-width: 300px;
+}
+
+.effect-indicator {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.9), rgba(255, 165, 0, 0.9));
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    animation: effectSlideIn 0.3s ease-out;
+}
+
+.effect-indicator.fade-out {
+    animation: effectSlideOut 0.3s ease-out forwards;
+}
+
+@keyframes effectSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes effectSlideOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+.effect-text {
+    display: block;
+    font-weight: bold;
+    color: #654321;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.effect-timer {
+    height: 4px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.effect-timer-bar {
+    height: 100%;
+    background: #654321;
+    border-radius: 2px;
+    animation: timerShrink linear forwards;
+}
+
+@keyframes timerShrink {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+/* إشعار ذهبي */
+.notification-golden {
+    background: linear-gradient(135deg, #ffd700, #ffaa00) !important;
+    color: #654321 !important;
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.5);
+}
+
+/* تأثير الشاشة عند التأثيرات النشطة */
+.frenzy-active {
+    animation: frenzyScreen 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes frenzyScreen {
+    from {
+        box-shadow: inset 0 0 50px rgba(255, 100, 0, 0.1);
+    }
+    to {
+        box-shadow: inset 0 0 100px rgba(255, 100, 0, 0.2);
+    }
+}
+
+/* تحسينات للموبايل */
+@media screen and (max-width: 480px) {
+    .golden-cookie {
+        width: 60px;
+        height: 60px;
+        font-size: 45px;
+    }
+
+    .falling-cookie {
+        font-size: 30px;
+    }
+
+    #effect-indicators {
+        top: 70px;
+        width: 85%;
+    }
+
+    .effect-indicator {
+        padding: 8px 12px;
+    }
+
+    .effect-text {
+        font-size: 0.9rem;
+    }
+}

@@ -13,8 +13,18 @@ const Game = {
     unlockedAchievements: [],
     stats: {
         totalUpgrades: 0,
-        startTime: Date.now()
+        startTime: Date.now(),
+        goldenClicked: 0,
+        goldenMissed: 0
     },
+
+    // مضاعفات
+    clickMultiplier: 1,
+    productionMultiplier: 1,
+
+    // تتبع سرعة النقر
+    clickTimestamps: [],
+    maxClickSpeed: 0,
 
     // متغيرات داخلية
     lastTick: Date.now(),
@@ -43,6 +53,11 @@ const Game = {
         
         // إضافة مستمعي الأحداث
         this.setupEventListeners();
+        
+        // تشغيل نظام الكوكيز الذهبي
+        if (typeof GoldenCookie !== 'undefined') {
+            GoldenCookie.init();
+        }
         
         console.log('✅ تم تشغيل اللعبة بنجاح');
     },
@@ -76,16 +91,28 @@ const Game = {
      * معالجة النقر
      */
     handleClick: function(e) {
+        // حساب قيمة النقرة مع المضاعفات
+        const actualClickValue = this.clickValue * this.clickMultiplier;
+        
         // زيادة الكوكيز
-        this.cookies += this.clickValue;
-        this.totalCookies += this.clickValue;
+        this.cookies += actualClickValue;
+        this.totalCookies += actualClickValue;
         this.clicks++;
+
+        // تتبع سرعة النقر
+        const now = Date.now();
+        this.clickTimestamps.push(now);
+        // الاحتفاظ فقط بالنقرات في آخر ثانية
+        this.clickTimestamps = this.clickTimestamps.filter(t => now - t < 1000);
+        if (this.clickTimestamps.length > this.maxClickSpeed) {
+            this.maxClickSpeed = this.clickTimestamps.length;
+        }
 
         // تأثير النقر
         const rect = document.getElementById('cookie').getBoundingClientRect();
         const x = e.clientX || (rect.left + rect.width / 2);
         const y = e.clientY || (rect.top + rect.height / 2);
-        UI.showClickEffect(x, y, this.clickValue);
+        UI.showClickEffect(x, y, actualClickValue);
 
         // أنيميشن الكوكيز
         const cookie = document.getElementById('cookie');
@@ -118,10 +145,11 @@ const Game = {
         const delta = (now - this.lastTick) / 1000; // بالثواني
         this.lastTick = now;
 
-        // إضافة الكوكيز من الإنتاج التلقائي
-        const cps = Shop.getTotalCps();
-        if (cps > 0) {
-            const earned = cps * delta;
+        // إضافة الكوكيز من الإنتاج التلقائي مع المضاعف
+        const baseCps = Shop.getTotalCps();
+        const actualCps = baseCps * this.productionMultiplier;
+        if (actualCps > 0) {
+            const earned = actualCps * delta;
             this.cookies += earned;
             this.totalCookies += earned;
         }
@@ -164,6 +192,8 @@ const Game = {
             UI.updateShop();
         } else if (tabName === 'achievements') {
             UI.updateAchievements();
+        } else if (tabName === 'prestige') {
+            UI.updatePrestige();
         } else if (tabName === 'stats') {
             UI.updateStats();
         }
@@ -181,7 +211,23 @@ const Game = {
             this.clicks = saveData.clicks || 0;
             this.upgrades = saveData.upgrades || {};
             this.unlockedAchievements = saveData.achievements || [];
-            this.stats = saveData.stats || { totalUpgrades: 0, startTime: Date.now() };
+            this.stats = saveData.stats || { 
+                totalUpgrades: 0, 
+                startTime: Date.now(),
+                goldenClicked: 0,
+                goldenMissed: 0
+            };
+            this.maxClickSpeed = saveData.maxClickSpeed || 0;
+            
+            // تحميل إحصائيات الكوكيز الذهبي
+            if (typeof GoldenCookie !== 'undefined' && saveData.goldenStats) {
+                GoldenCookie.loadStats(saveData.goldenStats);
+            }
+            
+            // تحميل بيانات البريستيج
+            if (typeof Prestige !== 'undefined' && saveData.prestige) {
+                Prestige.loadData(saveData.prestige);
+            }
             
             console.log('📂 تم تحميل الحفظ السابق');
         }
@@ -197,13 +243,35 @@ const Game = {
             this.clicks = 0;
             this.upgrades = {};
             this.unlockedAchievements = [];
-            this.stats = { totalUpgrades: 0, startTime: Date.now() };
+            this.stats = { 
+                totalUpgrades: 0, 
+                startTime: Date.now(),
+                goldenClicked: 0,
+                goldenMissed: 0
+            };
+            this.clickMultiplier = 1;
+            this.productionMultiplier = 1;
+            this.maxClickSpeed = 0;
+            this.clickTimestamps = [];
+            
+            // إعادة تعيين إحصائيات الكوكيز الذهبي
+            if (typeof GoldenCookie !== 'undefined') {
+                GoldenCookie.stats.totalClicked = 0;
+                GoldenCookie.stats.totalMissed = 0;
+            }
             
             SaveSystem.deleteSave();
             UI.updateAll();
             
             UI.showNotification('تم إعادة تعيين اللعبة', 'info');
         }
+    },
+
+    /**
+     * الحصول على وقت اللعب بالثواني
+     */
+    getPlayTime: function() {
+        return Math.floor((Date.now() - this.stats.startTime) / 1000);
     }
 };
 

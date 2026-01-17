@@ -16,7 +16,10 @@ const SaveSystem = {
             clicks: Game.clicks,
             upgrades: Game.upgrades,
             achievements: Game.unlockedAchievements,
-            stats: Game.stats
+            stats: Game.stats,
+            maxClickSpeed: Game.maxClickSpeed,
+            goldenStats: typeof GoldenCookie !== 'undefined' ? GoldenCookie.getStats() : null,
+            prestige: typeof Prestige !== 'undefined' ? Prestige.getSaveData() : null
         };
 
         try {

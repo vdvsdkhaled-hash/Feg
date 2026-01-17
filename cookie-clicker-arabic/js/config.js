@@ -7,7 +7,7 @@ const CONFIG = {
     // إعدادات اللعبة الأساسية
     GAME: {
         NAME: 'Cookie Clicker بالعربي',
-        VERSION: '1.0.0',
+        VERSION: '2.0.0',
         SAVE_INTERVAL: 30000, // حفظ كل 30 ثانية
         TICK_INTERVAL: 100,   // تحديث كل 100 مللي ثانية
     },

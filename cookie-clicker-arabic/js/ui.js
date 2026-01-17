@@ -109,6 +109,29 @@ const UI = {
     updateStats: function() {
         if (!this.elements.statsContainer) return;
 
+        const playTime = Game.getPlayTime();
+        const hours = Math.floor(playTime / 3600);
+        const minutes = Math.floor((playTime % 3600) / 60);
+        const seconds = playTime % 60;
+        const timeString = `${hours}س ${minutes}د ${seconds}ث`;
+
+        const actualCps = Shop.getTotalCps() * Game.productionMultiplier;
+        
+        let goldenStats = '';
+        if (typeof GoldenCookie !== 'undefined') {
+            const stats = GoldenCookie.getStats();
+            goldenStats = `
+                <div class="stat-item stat-golden">
+                    <span class="stat-label">🌟 كوكيز ذهبي منقور:</span>
+                    <span class="stat-value">${stats.clicked}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">😢 كوكيز ذهبي فائت:</span>
+                    <span class="stat-value">${stats.missed}</span>
+                </div>
+            `;
+        }
+
         this.elements.statsContainer.innerHTML = `
             <div class="stat-item">
                 <span class="stat-label">إجمالي الكوكيز:</span>
@@ -117,6 +140,10 @@ const UI = {
             <div class="stat-item">
                 <span class="stat-label">عدد النقرات:</span>
                 <span class="stat-value">${this.formatNumber(Game.clicks)}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">أقصى سرعة نقر:</span>
+                <span class="stat-value">${Game.maxClickSpeed} نقرة/ثانية</span>
             </div>
             <div class="stat-item">
                 <span class="stat-label">إجمالي الترقيات:</span>
@@ -128,7 +155,24 @@ const UI = {
             </div>
             <div class="stat-item">
                 <span class="stat-label">الإنتاج/ثانية:</span>
-                <span class="stat-value">${this.formatNumber(Shop.getTotalCps())}</span>
+                <span class="stat-value">${this.formatNumber(actualCps)}</span>
+            </div>
+            ${Game.productionMultiplier > 1 ? `
+            <div class="stat-item stat-bonus">
+                <span class="stat-label">🔥 مضاعف الإنتاج:</span>
+                <span class="stat-value">x${Game.productionMultiplier}</span>
+            </div>
+            ` : ''}
+            ${Game.clickMultiplier > 1 ? `
+            <div class="stat-item stat-bonus">
+                <span class="stat-label">👆 مضاعف النقر:</span>
+                <span class="stat-value">x${Game.clickMultiplier}</span>
+            </div>
+            ` : ''}
+            ${goldenStats}
+            <div class="stat-item">
+                <span class="stat-label">⏱️ وقت اللعب:</span>
+                <span class="stat-value">${timeString}</span>
             </div>
         `;
     },
@@ -205,12 +249,79 @@ const UI = {
     },
 
     /**
+     * تحديث البريستيج
+     */
+    updatePrestige: function() {
+        const container = document.getElementById('prestige-container');
+        if (!container || typeof Prestige === 'undefined') return;
+
+        const availableChips = Prestige.getAvailableChips();
+        const potentialChips = Prestige.getNewChips();
+        const multiplier = Prestige.getPrestigeMultiplier();
+        const canPrestige = Prestige.canPrestige();
+
+        let upgradesHtml = '';
+        Prestige.prestigeUpgrades.forEach(upgrade => {
+            const owned = Prestige.hasUpgrade(upgrade.id);
+            const canAfford = availableChips >= upgrade.cost;
+            const statusClass = owned ? 'owned' : (canAfford ? '' : 'locked');
+            
+            upgradesHtml += `
+                <div class="prestige-upgrade-item ${statusClass}" 
+                     onclick="${owned ? '' : `Prestige.buyUpgrade('${upgrade.id}')`}">
+                    <div class="prestige-upgrade-icon">${upgrade.icon}</div>
+                    <div class="prestige-upgrade-info">
+                        <div class="prestige-upgrade-name">${upgrade.name}</div>
+                        <div class="prestige-upgrade-desc">${upgrade.description}</div>
+                    </div>
+                    <div class="prestige-upgrade-cost ${owned ? 'owned' : ''}">
+                        ${owned ? '✓' : upgrade.cost + ' 💎'}
+                    </div>
+                </div>
+            `;
+        });
+
+        container.innerHTML = `
+            <div class="prestige-info">
+                <div class="prestige-chips">
+                    <span class="prestige-chips-icon">💎</span>
+                    ${availableChips} شريحة سماوية
+                </div>
+                <div class="prestige-level">
+                    المستوى: ${Prestige.prestigeLevel}
+                </div>
+                <div class="prestige-multiplier">
+                    مضاعف الإنتاج: x${multiplier.toFixed(2)}
+                </div>
+                ${potentialChips > 0 ? `
+                <div class="prestige-potential">
+                    يمكنك الحصول على <strong>${potentialChips}</strong> شريحة جديدة!
+                </div>
+                ` : `
+                <div class="prestige-potential" style="color: var(--text-secondary);">
+                    اجمع المزيد من الكوكيز للبريستيج
+                </div>
+                `}
+                <button class="prestige-btn" 
+                        onclick="Prestige.doPrestige()" 
+                        ${canPrestige ? '' : 'disabled'}>
+                    👑 بريستيج الآن
+                </button>
+            </div>
+            
+            <div class="prestige-upgrades-title">ترقيات سماوية</div>
+            ${upgradesHtml}
+        `;
+    },
+
+    /**
      * تحديث كل شيء
      */
     updateAll: function() {
         this.updateCookieDisplay();
         this.updateShop();
         this.updateAchievements();
+        this.updatePrestige();
         this.updateStats();
     }
 };
