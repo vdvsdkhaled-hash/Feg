@@ -1,0 +1,198 @@
+/**
+ * Cookie Clicker Arabic - أنماط البريستيج
+ */
+
+/* تبويب البريستيج */
+#prestige-tab {
+    padding: 15px;
+}
+
+/* معلومات البريستيج */
+.prestige-info {
+    background: linear-gradient(135deg, rgba(147, 112, 219, 0.3), rgba(138, 43, 226, 0.3));
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 1px solid rgba(147, 112, 219, 0.5);
+}
+
+.prestige-chips {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #dda0dd;
+    margin-bottom: 10px;
+}
+
+.prestige-chips-icon {
+    font-size: 2.5rem;
+    margin-left: 10px;
+}
+
+.prestige-level {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+}
+
+.prestige-multiplier {
+    font-size: 1.1rem;
+    color: #98fb98;
+    margin-bottom: 15px;
+}
+
+.prestige-potential {
+    font-size: 0.9rem;
+    color: #ffd700;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* زر البريستيج */
+.prestige-btn {
+    width: 100%;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #9370db, #8a2be2);
+    color: white;
+    box-shadow: 0 4px 15px rgba(147, 112, 219, 0.4);
+}
+
+.prestige-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(147, 112, 219, 0.6);
+}
+
+.prestige-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #666;
+}
+
+/* ترقيات البريستيج */
+.prestige-upgrades-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 20px 0 15px;
+    text-align: center;
+    color: #dda0dd;
+}
+
+.prestige-upgrade-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: rgba(147, 112, 219, 0.15);
+    border-radius: 12px;
+    border: 1px solid rgba(147, 112, 219, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.prestige-upgrade-item:hover:not(.owned):not(.locked) {
+    background: rgba(147, 112, 219, 0.25);
+    transform: translateX(-5px);
+}
+
+.prestige-upgrade-item.owned {
+    background: rgba(152, 251, 152, 0.2);
+    border-color: rgba(152, 251, 152, 0.5);
+}
+
+.prestige-upgrade-item.locked {
+    opacity: 0.5;
+}
+
+.prestige-upgrade-icon {
+    font-size: 2rem;
+    margin-left: 15px;
+}
+
+.prestige-upgrade-info {
+    flex: 1;
+}
+
+.prestige-upgrade-name {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 3px;
+    color: #dda0dd;
+}
+
+.prestige-upgrade-desc {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.prestige-upgrade-cost {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffd700;
+}
+
+.prestige-upgrade-cost.owned {
+    color: #98fb98;
+}
+
+/* أنيميشن البريستيج */
+@keyframes prestigeGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(147, 112, 219, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(147, 112, 219, 0.6);
+    }
+}
+
+.prestige-info {
+    animation: prestigeGlow 3s ease-in-out infinite;
+}
+
+/* شريحة سماوية متحركة */
+@keyframes chipFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-5px) rotate(5deg);
+    }
+}
+
+.prestige-chips-icon {
+    display: inline-block;
+    animation: chipFloat 2s ease-in-out infinite;
+}
+
+/* إحصائيات البريستيج في الإحصائيات */
+.stat-item.stat-prestige {
+    background: rgba(147, 112, 219, 0.2);
+    border: 1px solid rgba(147, 112, 219, 0.3);
+}
+
+/* تحسينات للموبايل */
+@media screen and (max-width: 480px) {
+    .prestige-info {
+        padding: 15px;
+    }
+
+    .prestige-chips {
+        font-size: 1.5rem;
+    }
+
+    .prestige-upgrade-item {
+        padding: 12px;
+    }
+
+    .prestige-upgrade-icon {
+        font-size: 1.5rem;
+    }
+}

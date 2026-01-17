@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="css/colors.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/golden.css">
+    <link rel="stylesheet" href="css/prestige.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
@@ -47,6 +49,7 @@
             <div class="tabs-header">
                 <button class="tab-btn active" data-tab="shop">🛒 المتجر</button>
                 <button class="tab-btn" data-tab="achievements">🏆 الإنجازات</button>
+                <button class="tab-btn" data-tab="prestige">👑 البريستيج</button>
                 <button class="tab-btn" data-tab="stats">📊 الإحصائيات</button>
                 <button class="tab-btn" data-tab="settings">⚙️ الإعدادات</button>
             </div>
@@ -68,6 +71,13 @@
                         <span id="achievements-count">0/0</span>
                     </div>
                     <div id="achievements-container">
+                        <!-- سيتم ملؤه بواسطة JavaScript -->
+                    </div>
+                </div>
+
+                <!-- تبويب البريستيج -->
+                <div id="prestige-tab" class="tab-content">
+                    <div id="prestige-container">
                         <!-- سيتم ملؤه بواسطة JavaScript -->
                     </div>
                 </div>
@@ -98,7 +108,7 @@
                         
                         <div style="margin-top: 30px; text-align: center; color: var(--text-secondary);">
                             <p>Cookie Clicker بالعربي</p>
-                            <p>الإصدار 1.0.0</p>
+                            <p>الإصدار 2.0.0</p>
                             <p style="margin-top: 10px; font-size: 0.8rem;">
                                 صُنع بـ ❤️ للموبايل
                             </p>
@@ -118,6 +128,8 @@
     <script src="js/shop.js"></script>
     <script src="js/achievements.js"></script>
     <script src="js/ui.js"></script>
+    <script src="js/golden.js"></script>
+    <script src="js/prestige.js"></script>
     <script src="js/game.js"></script>
 </body>
 </html>

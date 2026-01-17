@@ -385,3 +385,14 @@ body {
     transform: scale(1.02);
     opacity: 0.9;
 }
+
+/* إحصائيات خاصة */
+.stat-item.stat-golden {
+    background: rgba(255, 215, 0, 0.15);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.stat-item.stat-bonus {
+    background: rgba(74, 222, 128, 0.15);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+}

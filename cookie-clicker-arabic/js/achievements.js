@@ -36,6 +36,21 @@ const Achievements = {
             case 'upgrade':
                 return (Game.upgrades[req.upgradeId] || 0) >= req.value;
             
+            case 'goldenClicked':
+                if (typeof GoldenCookie !== 'undefined') {
+                    return GoldenCookie.stats.totalClicked >= req.value;
+                }
+                return false;
+            
+            case 'cps':
+                return Shop.getTotalCps() * Game.productionMultiplier >= req.value;
+            
+            case 'clickSpeed':
+                return Game.maxClickSpeed >= req.value;
+            
+            case 'playTime':
+                return Game.getPlayTime() >= req.value;
+            
             default:
                 return false;
         }

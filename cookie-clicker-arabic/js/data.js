@@ -68,6 +68,46 @@ const UPGRADES_DATA = [
         basePrice: 330000000,
         baseCps: 44000,
         icon: '🧙'
+    },
+    {
+        id: 'shipment',
+        name: 'السفينة الفضائية',
+        description: 'تجلب الكوكيز من الفضاء الخارجي',
+        basePrice: 5100000000,
+        baseCps: 260000,
+        icon: '🚀'
+    },
+    {
+        id: 'alchemy',
+        name: 'مختبر الكيمياء',
+        description: 'يحول الذهب إلى كوكيز',
+        basePrice: 75000000000,
+        baseCps: 1600000,
+        icon: '⚗️'
+    },
+    {
+        id: 'portal',
+        name: 'البوابة',
+        description: 'تفتح بوابة لعالم الكوكيز',
+        basePrice: 1000000000000,
+        baseCps: 10000000,
+        icon: '🌀'
+    },
+    {
+        id: 'timemachine',
+        name: 'آلة الزمن',
+        description: 'تجلب الكوكيز من الماضي',
+        basePrice: 14000000000000,
+        baseCps: 65000000,
+        icon: '⏰'
+    },
+    {
+        id: 'antimatter',
+        name: 'مكثف المادة المضادة',
+        description: 'يحول المادة المضادة إلى كوكيز',
+        basePrice: 170000000000000,
+        baseCps: 430000000,
+        icon: '⚛️'
     }
 ];
 
@@ -175,6 +215,98 @@ const ACHIEVEMENTS_DATA = [
         description: 'اشترِ 50 ترقية',
         requirement: { type: 'totalUpgrades', value: 50 },
         icon: '🏪'
+    },
+    {
+        id: 'industrialist',
+        name: 'صناعي',
+        description: 'اشترِ 100 ترقية',
+        requirement: { type: 'totalUpgrades', value: 100 },
+        icon: '🏭'
+    },
+
+    // إنجازات الكوكيز الذهبي
+    {
+        id: 'golden_1',
+        name: 'لمسة ذهبية',
+        description: 'انقر على أول كوكيز ذهبي',
+        requirement: { type: 'goldenClicked', value: 1 },
+        icon: '🌟'
+    },
+    {
+        id: 'golden_7',
+        name: 'صياد الذهب',
+        description: 'انقر على 7 كوكيز ذهبي',
+        requirement: { type: 'goldenClicked', value: 7 },
+        icon: '💫'
+    },
+    {
+        id: 'golden_27',
+        name: 'ملك الذهب',
+        description: 'انقر على 27 كوكيز ذهبي',
+        requirement: { type: 'goldenClicked', value: 27 },
+        icon: '👑'
+    },
+
+    // إنجازات الكوكيز الكبيرة
+    {
+        id: 'trillion',
+        name: 'تريليونير',
+        description: 'اصنع 1,000,000,000,000 كوكيز',
+        requirement: { type: 'cookies', value: 1000000000000 },
+        icon: '💎'
+    },
+    {
+        id: 'quadrillion',
+        name: 'كوادريليونير',
+        description: 'اصنع 1,000,000,000,000,000 كوكيز',
+        requirement: { type: 'cookies', value: 1000000000000000 },
+        icon: '🌌'
+    },
+
+    // إنجازات الإنتاج
+    {
+        id: 'cps_100',
+        name: 'منتج',
+        description: 'أنتج 100 كوكيز في الثانية',
+        requirement: { type: 'cps', value: 100 },
+        icon: '⚡'
+    },
+    {
+        id: 'cps_10000',
+        name: 'مصنع كوكيز',
+        description: 'أنتج 10,000 كوكيز في الثانية',
+        requirement: { type: 'cps', value: 10000 },
+        icon: '🔥'
+    },
+    {
+        id: 'cps_1000000',
+        name: 'إمبراطورية الكوكيز',
+        description: 'أنتج 1,000,000 كوكيز في الثانية',
+        requirement: { type: 'cps', value: 1000000 },
+        icon: '🏰'
+    },
+
+    // إنجازات خاصة
+    {
+        id: 'speed_clicker',
+        name: 'نقّار سريع',
+        description: 'انقر 15 مرة في ثانية واحدة',
+        requirement: { type: 'clickSpeed', value: 15 },
+        icon: '⚡'
+    },
+    {
+        id: 'patient',
+        name: 'صبور',
+        description: 'العب لمدة ساعة',
+        requirement: { type: 'playTime', value: 3600 },
+        icon: '⏳'
+    },
+    {
+        id: 'dedicated',
+        name: 'مخلص',
+        description: 'العب لمدة 10 ساعات',
+        requirement: { type: 'playTime', value: 36000 },
+        icon: '🎖️'
     }
 ];
 
